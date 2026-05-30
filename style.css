@@ -11,7 +11,7 @@ body {
   align-items: center;
   height: 100vh;
   overflow: hidden;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Press Start 2P', monospace;
   color: #fff;
 }
 
@@ -19,6 +19,8 @@ body {
   display: block;
   background: #1a1a1a;
   border: 2px solid #333;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
 #ui-overlay {
@@ -32,7 +34,7 @@ body {
   background: rgba(0, 0, 0, 0.55);
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  font-size: 16px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.04em;
   z-index: 10;
@@ -54,18 +56,18 @@ body {
   padding: 40px 56px;
   text-align: center;
   z-index: 20;
-  min-width: 300px;
+  min-width: 340px;
 }
 
 .screen h1 {
-  font-size: 2rem;
+  font-size: 1.2rem;
   margin-bottom: 12px;
   color: #f0c040;
   text-shadow: 0 0 12px #f0c04088;
 }
 
 .screen h2 {
-  font-size: 1.6rem;
+  font-size: 1rem;
   margin-bottom: 16px;
   color: #f0c040;
 }
@@ -73,11 +75,11 @@ body {
 .screen p {
   margin-bottom: 10px;
   color: #ccc;
-  font-size: 0.95rem;
+  font-size: 0.7rem;
 }
 
 .controls-hint {
-  font-size: 0.82rem !important;
+  font-size: 0.6rem !important;
   color: #888 !important;
   margin-bottom: 24px !important;
 }
@@ -85,7 +87,7 @@ body {
 button {
   margin-top: 16px;
   padding: 12px 36px;
-  font-size: 1rem;
+  font-size: 0.7rem;
   font-weight: 700;
   background: #f0c040;
   color: #111;
