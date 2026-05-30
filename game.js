@@ -190,8 +190,8 @@ function update() {
   });
 
   // Road scroll
-  state.road.dashOffset  = (state.road.dashOffset  + state.scrollSpeed) % 60;
-  state.road.scrollOffset = (state.road.scrollOffset + state.scrollSpeed) % 40;
+  state.road.dashOffset   = (state.road.dashOffset + state.scrollSpeed) % 60;
+  state.road.scrollOffset += state.scrollSpeed;
 
   // Speed ramp
   state.speedTimer++;
@@ -281,12 +281,16 @@ function triggerGameOver() {
 function drawGrass() {
   const stripeH = 20;
   const colors = ['#2d5a1b', '#3a7a22'];
-  const offset = state.road.scrollOffset % (stripeH * 2);
-  for (let y = -stripeH * 2 + offset; y < GAME_H; y += stripeH) {
-    const idx = Math.abs(Math.floor((y - offset) / stripeH)) % 2;
-    ctx.fillStyle = colors[idx];
+  const total = state.road.scrollOffset;
+  const phase = total % (stripeH * 2);
+  const startY = -(phase % stripeH) - stripeH;
+  const worldY_start = total - (total % stripeH) - stripeH;
+  let colorIdx = ((Math.floor(worldY_start / stripeH) % 2) + 2) % 2;
+  for (let y = startY; y < GAME_H; y += stripeH) {
+    ctx.fillStyle = colors[colorIdx];
     ctx.fillRect(0, px(y), ROAD_LEFT, stripeH);
     ctx.fillRect(ROAD_RIGHT, px(y), GAME_W - ROAD_RIGHT, stripeH);
+    colorIdx = 1 - colorIdx;
   }
 }
 
@@ -314,12 +318,16 @@ function drawKerb() {
   const blockH = 20;
   const blockW = 8;
   const colors = ['#cc2222', '#eeeeee'];
-  const offset = state.road.scrollOffset % (blockH * 2);
-  for (let y = -blockH * 2 + offset; y < GAME_H; y += blockH) {
-    const idx = Math.abs(Math.floor((y - offset) / blockH)) % 2;
-    ctx.fillStyle = colors[idx];
+  const total = state.road.scrollOffset;
+  const phase = total % (blockH * 2);
+  const startY = -(phase % blockH) - blockH;
+  const worldY_start = total - (total % blockH) - blockH;
+  let colorIdx = ((Math.floor(worldY_start / blockH) % 2) + 2) % 2;
+  for (let y = startY; y < GAME_H; y += blockH) {
+    ctx.fillStyle = colors[colorIdx];
     ctx.fillRect(ROAD_LEFT - blockW, px(y), blockW, blockH);
     ctx.fillRect(ROAD_RIGHT, px(y), blockW, blockH);
+    colorIdx = 1 - colorIdx;
   }
 }
 
